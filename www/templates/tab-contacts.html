@@ -4,7 +4,8 @@
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts" type="item-text-wrap" href="#/tab/contacts/{{contact.id}}">
         <img ng-src="{{contact.face}}">
         <h2>{{contact.name}}</h2>
-        <p>{{contact.Phone}}</p>
+        <p> Place: {{contact.MeetingPlace}} </p>
+        <p> Time: {{contact.MeetingTime}} </p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
