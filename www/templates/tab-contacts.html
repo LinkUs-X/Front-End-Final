@@ -1,11 +1,12 @@
 <ion-view view-title="Contacts">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts" type="item-text-wrap" href="#/tab/contacts/{{contact.id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts" type="item-text-wrap" href="#/tab/contacts/{{contact.id_card}}">
         <img ng-src="{{contact.face}}">
-        <h2>{{contact.name}}</h2>
-        <p> Place: {{contact.MeetingPlace}} </p>
-        <p> Time: {{contact.MeetingTime}} </p>
+        <h2>{{card.name}}</h2>
+        <p> {{contact.MeetingPlace}} </p>
+        <p> {{contact.MeetingTime}} </p>
+        
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
