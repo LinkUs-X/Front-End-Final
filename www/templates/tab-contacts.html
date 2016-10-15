@@ -1,9 +1,9 @@
 <ion-view view-title="Contacts">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts" type="item-text-wrap" href="#/tab/contacts/{{contact.id_card}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts" type="item-text-wrap" href="#/tab/contacts/{{contact.id_meet}}">
         <img ng-src="{{contact.face}}">
-        <h2>{{card.name}}</h2>
+        <h2>{{contact.name}}</h2>
         <p> {{contact.MeetingPlace}} </p>
         <p> {{contact.MeetingTime}} </p>
         

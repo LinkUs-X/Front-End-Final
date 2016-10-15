@@ -2,15 +2,21 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope) {})
 
-.controller('ContactsCtrl', function($scope, Contacts, Cards) {
+.controller('ContactsCtrl', function($scope, Contacts) {
   $scope.contacts = Contacts.all();
-  //$scope.contact = Contacts.get($stateParams.contactId);
-  //$scope.card = Cards.get($stateParams.contacts);
+/*    
+.controller('ShowsCtrl', function($scope, Contacts) {
+  $scope.contacts = [];
+  Contacts.all().then(function(apiShows) { $scope.contacts = apiContacts;
+  });
+    */
+})
 })
 
-.controller('ContactDetailCtrl', function($scope, $stateParams, Contacts, Cards) {
-  $scope.contact = Contacts.get($stateParams.contactId);
-  $scope.card = Cards.get($stateParams.contactId);
+.controller('ContactDetailCtrl', function($scope, $stateParams, Contacts) {
+  $scope.contact = Contacts.get($stateParams.contactId); 
+
 })
+
 
 .controller('AccountCtrl', function($scope) {});
