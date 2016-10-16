@@ -1,10 +1,10 @@
 angular.module('starter.services', [])
 
-
+/*
 .factory('Contacts', function() {
   // Might use a resource here that returns a JSON array
 
-    /*
+    
   // With Heroku
   var contacts = [];
 

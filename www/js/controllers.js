@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
   });
     */
 })
-})
+
 
 .controller('ContactDetailCtrl', function($scope, $stateParams, Contacts) {
   $scope.contact = Contacts.get($stateParams.contactId); 
