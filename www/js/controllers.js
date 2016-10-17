@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
 .controller('ContactsCtrl', function($scope, Contacts) {
   $scope.contacts = Contacts.all();
 /*    
-.controller('ShowsCtrl', function($scope, Contacts) {
+.controller('ContactsCtrl', function($scope, Contacts) {
   $scope.contacts = [];
   Contacts.all().then(function(apiShows) { $scope.contacts = apiContacts;
   });
