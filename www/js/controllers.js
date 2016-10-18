@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
 
   $scope.createuser = function(login, password) {
     return Users.createuser(login, password)
-    .then(function(createuser) {
+    .then(function(response) {
       console.log("User", user);
       alert("New user has been created ");
       $scope.closeModalcreateuser();
@@ -53,8 +53,9 @@ angular.module('starter.controllers', [])
   }
 
   // createcard
+
   $scope.openModalcreatecard = function() {
-  $scope.modalcreatecard.show();
+    $scope.modalcreatecard.show();
   };
   $scope.closeModalcreatecard = function() {
     $scope.modalcreatecard.hide();
@@ -62,44 +63,13 @@ angular.module('starter.controllers', [])
 
   $scope.createcard = function(login, password, card_name, first_name, last_name, phone_nbr, facebook_link, 
         linkedin_link, email, street, city, postal_code, country, description, picture_url) {
+
     return Cards.createcard(login, password, card_name, first_name, last_name, phone_nbr, facebook_link, 
         linkedin_link, email, street, city, postal_code, country, description, picture_url)
-    .then(function(createcard) {
+    .then(function(response) {
       console.log("Card", card);
       alert("New card has been created ");
-      $scope.closeModal();
+      $scope.closeModalcreatecard();
     })
   }
-
 });
-
-/*
-app.controller('Ctrl1' function($scope, $ionicModal){
-
-     $ionicModal.fromTemplateUrl('modalA.html', {
-          scope: $scope,
-          animation: 'slide-in-up'
-        }).then(function(modal) {
-          $scope.ModalA= modal;
-        });
-
-     $ionicModal.fromTemplateUrl('modalB.html', {
-          scope: $scope,
-          animation: 'slide-in-up'
-        }).then(function(modal) {
-          $scope.ModalB= modal;
-        });
-
-
-    //now you can indivitaully call any modal to show
-
-    $scope.ShowModalA = function (){
-         $scope.ModalA.show()
-    }
-
-    $scope.ShowModalB= function (){
-         $scope.ModalB.show()
-    }
-
- })
- */

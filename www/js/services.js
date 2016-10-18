@@ -53,17 +53,38 @@ angular.module('starter.services', [])
     return {
       createcard: function(login, password, card_name, first_name, last_name, phone_nbr, facebook_link, 
         linkedin_link, email, street, city, postal_code, country, description, picture_url) {
-        // make a $http.get to find out which userId corresponds to login, password
-        userId: 1;
-        return $http.post("https://link-us-back.herokuapp.com/users/" + userId + "createcard.json", 
-          {card: {card_name: card_name, first_name: first_name, last_name: last_name, phone_nbr: phone_nbr, 
-            facebook_link: facebook_link, linkedin_link: linkedin_link, email: email, street: street, city: city, 
-            postal_code: postal_code, country: country, description: description, picture_url: picture_url}})
-            .then(function(response){
-            card = response.data;
-            return card;
-        })
-      }
+
+      // find the user id: make a $http.get to find out which userId corresponds to login and password
+      // 1. get the whole json of all users 2. iterate to find the matching login 3. assign the userId accordingly
+      var userId = 0; // default value for now
+      $http.get("https://link-us-back.herokuapp.com/users.json")
+      .then(function(response) {
+
+        users = response.data;
+        for (var i = 0; i < users.length; i++) {
+          if (users[i].login  === login) {
+          userId = users[i].id;
+          alert(userId + ", " + i);
+          }
+        }
+        if(userId === 0){
+          alert("wrong login");
+          userId = 1;
+        }
+      });
+
+      // here I have to find a way to stall in order to wait to find the right userId
+
+      return $http.post("https://link-us-back.herokuapp.com/users/" + userId + "/createcard.json", 
+        {card: {card_name: card_name, first_name: first_name, last_name: last_name, phone_nbr: phone_nbr, 
+        facebook_link: facebook_link, linkedin_link: linkedin_link, email: email, street: street, city: city, 
+        postal_code: postal_code, country: country, description: description, picture_url: picture_url}})
+        .then(function(response2){
+          card = response2.data;
+          return card;
+        }
+        )
+    }
   }
 })
 
