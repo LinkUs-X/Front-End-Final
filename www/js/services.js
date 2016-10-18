@@ -29,6 +29,44 @@ angular.module('starter.services', [])
 */
 
 
+.factory('Users', function($http) {
+
+  var users = [
+  ];
+
+    return {
+      createuser: function(login, password) {
+        return $http.post("https://link-us-back.herokuapp.com/users/createuser.json", 
+          {user: {login: login, password: password}}).then(function(response){
+            user = response.data;
+            return user;
+        })
+      }
+  }
+})
+
+.factory('Cards', function($http) {
+
+  var cards = [
+  ];
+
+    return {
+      createcard: function(login, password, card_name, first_name, last_name, phone_nbr, facebook_link, 
+        linkedin_link, email, street, city, postal_code, country, description, picture_url) {
+        // make a $http.get to find out which userId corresponds to login, password
+        userId: 1;
+        return $http.post("https://link-us-back.herokuapp.com/users/" + userId + "createcard.json", 
+          {card: {card_name: card_name, first_name: first_name, last_name: last_name, phone_nbr: phone_nbr, 
+            facebook_link: facebook_link, linkedin_link: linkedin_link, email: email, street: street, city: city, 
+            postal_code: postal_code, country: country, description: description, picture_url: picture_url}})
+            .then(function(response){
+            card = response.data;
+            return card;
+        })
+      }
+  }
+})
+
 
 .factory('Contacts', function() {
   // Might use a resource here that returns a JSON array

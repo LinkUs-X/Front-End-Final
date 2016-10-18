@@ -1,0 +1,19 @@
+<ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Sign in</h1>
+      <button class="button button-secondary" ng-click="closeModalcreateuser()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+      <label class="item item-input">
+  		<span class="input-label">Login</span>
+  		<input type="text" ng-model="login">
+	  </label>
+	  <label class="item item-input">
+    	<span class="input-label">Password</span>
+    	<input type="text" ng-model="password">
+  	  </label>
+  	  <button class="button button-block button-positive" ng-click="createuser(login, password)" ng-disabled="!login || !password">
+  		Confirm
+	  </button>
+    </ion-content>
+ </ion-modal-view>
