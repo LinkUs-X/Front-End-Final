@@ -21,6 +21,7 @@ angular.module('starter.controllers', [])
 
 .controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
 
+  // create user
   $ionicModal.fromTemplateUrl('templates/modalcreateuser.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -52,8 +53,7 @@ angular.module('starter.controllers', [])
     })
   }
 
-  // createcard
-
+  // create card
   $scope.openModalcreatecard = function() {
     $scope.modalcreatecard.show();
   };

@@ -1,38 +1,26 @@
 angular.module('starter.services', [])
 
+
 /*
-.factory('Contacts', function() {
-  // Might use a resource here that returns a JSON array
+.factory('Links', function($http) {
 
-    
-  // With Heroku
-  var contacts = [];
+  var links = [];
 
-  return {
-    all: function(userId) {
-      return $http.get("http://link-us-back.herokuapp.com/"+ userId +  ".json")
-        .then(function(response) {
-          contacts = response.data;
-          return contacts;
-    },
-  
-    get: function(contactId) {
-      for (var i = 0; i < contacts.length; i++) {
-        if (contacts[i].id_meet === parseInt(contactId)) {
-          return contacts[i];
-        }
+    return {
+      createlink: function(login, login_new_contact) {
+        return $http.post("https://link-us-back.herokuapp.com/users/createuser.json", 
+          {user: {login: login, password: password}}).then(function(response){
+            user = response.data;
+            return user;
+        })
       }
-      return null;
-    }
-  };
-});
+  }
+})
 */
-
 
 .factory('Users', function($http) {
 
-  var users = [
-  ];
+  var users = [];
 
     return {
       createuser: function(login, password) {
@@ -46,20 +34,17 @@ angular.module('starter.services', [])
 })
 
 .factory('Cards', function($http) {
+  var cards = [];
 
-  var cards = [
-  ];
-
-    return {
-      createcard: function(login, password, card_name, first_name, last_name, phone_nbr, facebook_link, 
-        linkedin_link, email, street, city, postal_code, country, description, picture_url) {
+  return {
+    createcard: function(login, password, card_name, first_name, last_name, phone_nbr, facebook_link,
+      linkedin_link, email, street, city, postal_code, country, description, picture_url) {
 
       // find the user id: make a $http.get to find out which userId corresponds to login and password
       // 1. get the whole json of all users 2. iterate to find the matching login 3. assign the userId accordingly
       var userId = 0; // default value for now
-      $http.get("https://link-us-back.herokuapp.com/users.json")
+      return $http.get("https://link-us-back.herokuapp.com/users.json")
       .then(function(response) {
-
         users = response.data;
         for (var i = 0; i < users.length; i++) {
           if (users[i].login  === login) {
@@ -71,28 +56,28 @@ angular.module('starter.services', [])
           alert("wrong login");
           userId = 1;
         }
+      })
+      .then(function(response) {
+        // here I have to find a way to stall in order to wait to find the right userId
+        return $http.post("https://link-us-back.herokuapp.com/users/" + userId + "/createcard.json",
+          {card: {card_name: card_name, first_name: first_name, last_name: last_name, phone_nbr: phone_nbr,
+          facebook_link: facebook_link, linkedin_link: linkedin_link, email: email, street: street, city: city,
+          postal_code: postal_code, country: country, description: description, picture_url: picture_url}})
+      })
+      .then(function(response2) {
+        card = response2.data;
+        return card;
+      })
+      .then(undefined, function(error) {
+        console.log('ERR services > Cards : ', error.message);
       });
-
-      // here I have to find a way to stall in order to wait to find the right userId
-
-      return $http.post("https://link-us-back.herokuapp.com/users/" + userId + "/createcard.json", 
-        {card: {card_name: card_name, first_name: first_name, last_name: last_name, phone_nbr: phone_nbr, 
-        facebook_link: facebook_link, linkedin_link: linkedin_link, email: email, street: street, city: city, 
-        postal_code: postal_code, country: country, description: description, picture_url: picture_url}})
-        .then(function(response2){
-          card = response2.data;
-          return card;
-        }
-        )
     }
   }
 })
 
 
 .factory('Contacts', function() {
-  // Might use a resource here that returns a JSON array
 
-  // Some fake testing data
   var contacts = [
   {
     id_meet: 0,
@@ -165,3 +150,28 @@ angular.module('starter.services', [])
     }
   };
 });
+
+/*
+.factory('Contacts', function() {
+    
+  var contacts = [];
+
+  return {
+    all: function(userId) {
+      return $http.get("http://link-us-back.herokuapp.com/"+ userId +  ".json")
+        .then(function(response) {
+          contacts = response.data; 
+          return contacts;
+    },
+  
+    get: function(contactId) {
+      for (var i = 0; i < contacts.length; i++) {
+        if (contacts[i].id_meet === parseInt(contactId)) {
+          return contacts[i];
+        }
+      }
+      return null;
+    }
+  };
+});
+*/
