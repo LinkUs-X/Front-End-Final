@@ -29,8 +29,15 @@ angular.module('starter.services', [])
             user = response.data;
             return user;
         })
+      },
+      finduser: function(login, password) {
+        return $http.get("https://link-us-back.herokuapp.com/users.json", 
+          {user: {login: login, password: password}}).then(function(response){
+            user = response.data;
+            return user.id;
+        })
       }
-  }
+    }
 })
 
 .factory('Cards', function($http) {

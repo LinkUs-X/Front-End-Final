@@ -1,26 +1,52 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope) {})
+// localStorage.setItem('favoriteflavor','vanilla');
+// var taste = localStorage.getItem('favoriteflavor');
+// -> "vanilla"
+// localStorage.removeItem('favoriteflavor');
+// -> null
 
-.controller('ContactsCtrl', function($scope, Contacts) {
-  $scope.contacts = Contacts.all();
-/*    
-.controller('ContactsCtrl', function($scope, Contacts) {
-  $scope.contacts = [];
-  Contacts.all().then(function(apiShows) { $scope.contacts = apiContacts;
+
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
+
+  $scope.isLogged = false;
+  // localStorage.setItem('isLogged','false');
+
+})
+
+.controller('LoginCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
+
+  // finduser
+  $ionicModal.fromTemplateUrl('templates/modallogin.html', {
+  scope: $scope,
+  animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modallogin = modal;
   });
-    */
+
+  $scope.openModallogin = function() {
+    $scope.modallogin.show();
+  };
+  $scope.closeModallogin = function() {
+    $scope.modallogin.hide();
+  };
+
+  $scope.finduser = function(login, password) {
+    return Users.finduser(login, password) //checkuser returns the userId
+    .then(function(response) {
+      alert("loged in ");
+      $scope.closeModallogin();
+      // Assign userId to local storrage
+      // set isLogged to true
+    })
+    .then(undefined, function(error) {
+        console.log('ERR services > Users : ', error.message);
+    });
+  }
+
 })
 
-
-.controller('ContactDetailCtrl', function($scope, $stateParams, Contacts) {
-  $scope.contact = Contacts.get($stateParams.contactId); 
-
-})
-
-
-.controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
-
+.controller('CreateCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
   // create user
   $ionicModal.fromTemplateUrl('templates/modalcreateuser.html', {
     scope: $scope,
@@ -29,14 +55,6 @@ angular.module('starter.controllers', [])
     $scope.modalcreateuser = modal;
   });
 
-  $ionicModal.fromTemplateUrl('templates/modalcreatecard.html', {
-  scope: $scope,
-  animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modalcreatecard = modal;
-  });
-
-  // createuser
   $scope.openModalcreateuser = function() {
     $scope.modalcreateuser.show();
   };
@@ -52,6 +70,31 @@ angular.module('starter.controllers', [])
       $scope.closeModalcreateuser();
     })
   }
+})
+
+.controller('ContactsCtrl', function($scope, Contacts) {
+  $scope.contacts = Contacts.all();
+/*    
+.controller('ContactsCtrl', function($scope, Contacts) {
+  $scope.contacts = [];
+  Contacts.all().then(function(apiShows) { $scope.contacts = apiContacts;
+  });
+    */
+})
+
+.controller('ContactDetailCtrl', function($scope, $stateParams, Contacts) {
+  $scope.contact = Contacts.get($stateParams.contactId); 
+
+})
+
+.controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
+
+  $ionicModal.fromTemplateUrl('templates/modalcreatecard.html', {
+  scope: $scope,
+  animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modalcreatecard = modal;
+  });
 
   // create card
   $scope.openModalcreatecard = function() {

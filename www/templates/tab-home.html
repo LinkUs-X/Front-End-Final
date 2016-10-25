@@ -1,7 +1,23 @@
 <ion-view view-title="Home" class="dashboard">
   <ion-content class="padding">
    
-    
+    <!-- not loged in -->
+    <!--     The ng-if directive removes the HTML element if the expression evaluates to false. 
+    <div ng-if="!isLogged"> -->
+
+
+    <div ng-controller="HomeCtrl" ng-show="!isLogged">
+
+    	<button ng-controller="LoginCtrl" class="button button-block button-positive" ng-click="openModallogin()">
+        Login
+      </button>
+
+    	<button ng-controller="CreateCtrl" class="button button-block button-positive" ng-click="openModalcreateuser()">
+		    Create account
+		  </button>
+
+	  </div>
+
     <img src="img/logo.png" class="logo" />
       </div>
       <button class="button button-block button-positive">

@@ -4,15 +4,23 @@
       <button class="button button-secondary" ng-click="closeModallinkus()">Cancel</button>
     </ion-header-bar>
     <ion-content>
-      <label class="item item-input">
-  		<span class="input-label">Login</span>
-  		<input type="text" ng-model="login">
+
+    <label class="item item-input">
+  		<span class="input-label">Card id you in your contact list</span>
+  		<input type="text" ng-model="card_id">
 	  </label>
+
 	  <label class="item item-input">
-    	<span class="input-label">User login you want to make a link with:</span>
-    	<input type="text" ng-model="login_new_contact">
-  	  </label>
-  	  <button class="button button-block button-positive" ng-click="createlink(login, login_new_contact)" ng-disabled="!login || !login_new_contact">
+    	<span class="input-label">Latitude:</span>
+    	<input type="text" ng-model="lat">
+  	</label>
+
+        <label class="item item-input">
+      <span class="input-label">Longitude:</span>
+      <input type="text" ng-model="lng">
+    </label>
+
+  	  <button class="button button-block button-positive" ng-click="createlink(card_id, lat, log)" ng-disabled="!card_id">
   		Confirm
 	  </button>
     </ion-content>
