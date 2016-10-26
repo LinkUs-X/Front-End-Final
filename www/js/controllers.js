@@ -1,16 +1,17 @@
 angular.module('starter.controllers', [])
 
-// localStorage.setItem('favoriteflavor','vanilla');
-// var taste = localStorage.getItem('favoriteflavor');
-// -> "vanilla"
-// localStorage.removeItem('favoriteflavor');
-// -> null
-
 
 .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
 
-  $scope.isLogged = false;
-  // localStorage.setItem('isLogged','false');
+  localStorage.setItem('isLogged', false);
+  $scope.isLogged = JSON.parse(localStorage.getItem('isLogged'));
+
+  /*
+  $scope.isLogged = checkstate();
+  $scope.checkstate = function(){
+    return JSON.parse(localStorage.getItem('isLogged'));
+  }
+  */
 
 })
 
@@ -34,16 +35,16 @@ angular.module('starter.controllers', [])
   $scope.finduser = function(login, password) {
     return Users.finduser(login, password) //checkuser returns the userId
     .then(function(response) {
-      alert("loged in ");
+      console.log("User", user);
+      console.log(response);
+      localStorage.setItem('userid', response);
+      localStorage.setItem('isLogged', true);
       $scope.closeModallogin();
-      // Assign userId to local storrage
-      // set isLogged to true
     })
     .then(undefined, function(error) {
         console.log('ERR services > Users : ', error.message);
     });
   }
-
 })
 
 .controller('CreateCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
@@ -66,7 +67,9 @@ angular.module('starter.controllers', [])
     return Users.createuser(login, password)
     .then(function(response) {
       console.log("User", user);
-      alert("New user has been created ");
+      console.log(response);
+      localStorage.setItem('userid', response);
+      localStorage.setItem('isLogged', true);
       $scope.closeModalcreateuser();
     })
   }

@@ -18,6 +18,7 @@ angular.module('starter.services', [])
 })
 */
 
+
 .factory('Users', function($http) {
 
   var users = [];
@@ -27,7 +28,7 @@ angular.module('starter.services', [])
         return $http.post("https://link-us-back.herokuapp.com/users/createuser.json", 
           {user: {login: login, password: password}}).then(function(response){
             user = response.data;
-            return user;
+            return user.id;
         })
       },
       finduser: function(login, password) {
