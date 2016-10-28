@@ -1,21 +1,25 @@
 angular.module('starter.controllers', [])
 
 
-.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
-
-  localStorage.setItem('isLogged', false);
-  $scope.isLogged = JSON.parse(localStorage.getItem('isLogged'));
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, logStatus) {
 
   /*
-  $scope.isLogged = checkstate();
-  $scope.checkstate = function(){
-    return JSON.parse(localStorage.getItem('isLogged'));
-  }
+  localStorage.setItem('isLogged', false);
+  $scope.isLogged = JSON.parse(localStorage.getItem('isLogged'));
   */
+
+  /*
+  $scope.isLogged = logStatus.isLogged;
+  */
+
+  $scope.isLogged = logStatus.isLogged;
+  $scope.$watch('isLogged', function () {
+    $scope.isLogged = logStatus.isLogged;
+  });
 
 })
 
-.controller('LoginCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
+.controller('LoginCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus) {
 
   // finduser
   $ionicModal.fromTemplateUrl('templates/modallogin.html', {
@@ -39,7 +43,13 @@ angular.module('starter.controllers', [])
       console.log(response);
       localStorage.setItem('userid', response);
       localStorage.setItem('isLogged', true);
+      /*
+      console.log(JSON.parse(localStorage.getItem('isLogged')));
+      */
       $scope.closeModallogin();
+    }).then(function(response){
+      logStatus.modifyStatus(true);
+      $scope.closeModalcreateuser();
     })
     .then(undefined, function(error) {
         console.log('ERR services > Users : ', error.message);
@@ -47,7 +57,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('CreateCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
+.controller('CreateCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus) {
   // create user
   $ionicModal.fromTemplateUrl('templates/modalcreateuser.html', {
     scope: $scope,
@@ -70,12 +80,15 @@ angular.module('starter.controllers', [])
       console.log(response);
       localStorage.setItem('userid', response);
       localStorage.setItem('isLogged', true);
+      logStatus.modifyStatus(true);
+    }).then(function(response){
+      console.log(logStatus.isLogged);
       $scope.closeModalcreateuser();
-    })
+    });
   }
 })
 
-.controller('ContactsCtrl', function($scope, Contacts) {
+.controller('ContactsCtrl', function($scope, Contacts, logStatus) {
   $scope.contacts = Contacts.all();
 /*    
 .controller('ContactsCtrl', function($scope, Contacts) {
@@ -85,12 +98,12 @@ angular.module('starter.controllers', [])
     */
 })
 
-.controller('ContactDetailCtrl', function($scope, $stateParams, Contacts) {
+.controller('ContactDetailCtrl', function($scope, $stateParams, Contacts, logStatus) {
   $scope.contact = Contacts.get($stateParams.contactId); 
 
 })
 
-.controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards) {
+.controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus) {
 
   $ionicModal.fromTemplateUrl('templates/modalcreatecard.html', {
   scope: $scope,

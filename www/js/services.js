@@ -18,12 +18,24 @@ angular.module('starter.services', [])
 })
 */
 
+.factory('logStatus', function($http){
+  
+  var isLogged = false; // will be considered only on the first utilisation
+
+  return{
+    modifyStatus: function(newStatus){  // will be considered only when called
+      isLogged = newStatus;
+    },
+    isLogged: isLogged
+  };
+})
 
 .factory('Users', function($http) {
 
   var users = [];
 
     return {
+
       createuser: function(login, password) {
         return $http.post("https://link-us-back.herokuapp.com/users/createuser.json", 
           {user: {login: login, password: password}}).then(function(response){
@@ -31,15 +43,32 @@ angular.module('starter.services', [])
             return user.id;
         })
       },
+
       finduser: function(login, password) {
         return $http.get("https://link-us-back.herokuapp.com/users.json", 
           {user: {login: login, password: password}}).then(function(response){
-            user = response.data;
-            return user.id;
-        })
+            users = response.data;
+            var userId = -1; // default value for now
+            for (var i = 0; i < users.length; i++) {
+              if (users[i].login  === login) {
+              userId = users[i].id;
+              user = users[i];
+              alert(userId + ", " + i);
+              }
+            }
+            return userId;
+        }).then(function(response){
+            // find the right user with corresponding login
+            return userId;
+          })
       }
+    
     }
+
 })
+
+
+
 
 .factory('Cards', function($http) {
   var cards = [];
