@@ -88,15 +88,27 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('ContactsCtrl', function($scope, Contacts, logStatus) {
-  $scope.contacts = Contacts.all();
-/*    
-.controller('ContactsCtrl', function($scope, Contacts) {
-  $scope.contacts = [];
-  Contacts.all().then(function(apiShows) { $scope.contacts = apiContacts;
-  });
-    */
+.controller('ContactsCtrl', function($scope, Links, logStatus) {
+    $scope.links = []
+    userId = 16;//localStorage.getItem('userid', response);
+    $scope.all = function(userId){
+    return Links.all(userId) //checkuser returns the userId
+    .then(function(response) {
+        $scope.links = response;
+    }
+)
+} 
 })
+
+/*         
+.controller('ContactsCtrl', function($scope, Contacts) {
+  $scope.contacts = Contacts.all();
+  })
+    
+*/
+
+
+
 
 .controller('ContactDetailCtrl', function($scope, $stateParams, Contacts, logStatus) {
   $scope.contact = Contacts.get($stateParams.contactId); 

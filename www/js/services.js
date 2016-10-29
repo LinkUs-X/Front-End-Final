@@ -17,8 +17,7 @@ angular.module('starter.services', [])
   }
 })
 */
-
-.factory('logStatus', function($http){
+.factory('logStatus', function ($http) {
   
   var isLogged = false; // will be considered only on the first utilisation
 
@@ -112,7 +111,7 @@ angular.module('starter.services', [])
   }
 })
 
-
+/*
 .factory('Contacts', function() {
 
   var contacts = [
@@ -195,7 +194,7 @@ angular.module('starter.services', [])
 
   return {
     all: function(userId) {
-      return $http.get("http://link-us-back.herokuapp.com/"+ userId +  ".json")
+      return $http.get("https://link-us-back.herokuapp.com/users/" + userId + "/showlinksbyuser.json")
         .then(function(response) {
           contacts = response.data; 
           return contacts;
@@ -212,3 +211,29 @@ angular.module('starter.services', [])
   };
 });
 */
+.factory('Links', function($http) {
+
+  var contacts = [];
+
+    return {
+
+      all: function(userId) {
+        return $http.get("https://link-us-back.herokuapp.com/users/" + userId + "/showlinksbyuser.json"). 
+          then(function(response){
+            links = response.data;
+            return links; 
+            })
+            
+        },
+               
+       get: function(contactId) {
+      for (var i = 0; i < contacts.length; i++) {
+        if (contacts[i].id_meet === parseInt(contactId)) {
+          return contacts[i];
+        }
+      }
+      return null;
+       }
+      
+      }
+});
