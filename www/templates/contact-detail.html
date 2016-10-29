@@ -4,7 +4,7 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Contact">
+<ion-view view-title="{{contact.card.card_name}}">
   <ion-content class="padding">
     <!-- <img ng-src="{{contact.face}}" style="width: 64px; height: 64px"> -->
    <!--
@@ -21,9 +21,9 @@
     <div class="list card">
 
   <div class="item item-avatar">
-    <img src="mcfly.jpg">
-    <h2>{{contact.name}}</h2>
-    <p> {{contact.MeetingPlace}}</p> 
+    <!--<img src="mcfly.jpg">-->
+    <h2>{{contact.card.first_name}} {{contact.card.last_name}}</h2>
+    <p> {{contact.created_at}}</p> 
     <p>{{contact.MeetingTime}}</p>
   </div>
 
@@ -33,7 +33,7 @@
     <i class="icon ion-email"></i>
     Mail
       <span class="item-note">
-      {{contact.email}} 
+      {{contact.card.emaill}} 
        </span>
   </a>
 
@@ -41,7 +41,7 @@
     <i class="icon ion-ios-telephone"></i>
       Phone
      <span class="item-note">
-         {{contact.Number}}
+         {{contact.card.phone_nbr}}
        </span>   
   </a>
 
@@ -49,11 +49,27 @@
     <i class="icon ion-social-facebook"></i>
  
       <span class="item-note">
-        <button class="button icon-left ion-person-add" href={{contact.facebook}}> Add </button>
+        <button class="button icon-left ion-person-add" href={{contact.card.facebook_link}}> Add </button>
+       </span>  
+  </a>
+      
+      <a class="item item-icon-left" href="#">
+    <i class="icon ion-social-linkedin"></i>
+ 
+      <span class="item-note">
+        <button class="button icon-left ion-person-add" href={{contact.card.linkedin_link}}> Add </button>
        </span>  
   </a>
 
+      <a class="item item-icon-left" href="#">
+    <i class="icon ion-android-pin"></i>
+          Adress
+     <span class="item-note" >
+         {{contact.card.street}},{{contact.card.postal_code}},{{contact.card.city}},{{contact.card.country}}
+       </span> 
+  </a>
 
+      
 </div>
 
 </div>

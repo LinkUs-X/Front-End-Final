@@ -211,7 +211,7 @@ angular.module('starter.services', [])
   };
 });
 */
-.factory('Links', function($http) {
+.factory('Contacts', function($http) {
 
   var contacts = [];
 
@@ -219,21 +219,42 @@ angular.module('starter.services', [])
 
       all: function(userId) {
         return $http.get("https://link-us-back.herokuapp.com/users/" + userId + "/showlinksbyuser.json"). 
+          //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
           then(function(response){
-            links = response.data;
-            return links; 
+            contacts = response.data;
+            contacts = contacts.links;
+            return contacts; 
             })
             
         },
                
        get: function(contactId) {
       for (var i = 0; i < contacts.length; i++) {
-        if (contacts[i].id_meet === parseInt(contactId)) {
+        if (contacts[i].card_id === parseInt(contactId)) {
           return contacts[i];
         }
       }
       return null;
-       }
-      
+       },
+      /*
+      getloca: function(contact) {
+            var loc = "";
+            geocoder = new google.maps.Geocoder();
+            var lat = 41.32;
+            var lng = 3.21;
+          
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                       loc =  "Location: " + results[1].formatted_address;
+                        
+                    }
+                }
+            });
+            
+      return loc;
       }
+      */
+    }
 });

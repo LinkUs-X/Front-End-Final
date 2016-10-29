@@ -88,17 +88,16 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('ContactsCtrl', function($scope, Links, logStatus) {
-    $scope.links = []
-    userId = 16;//localStorage.getItem('userid', response);
-    $scope.all = function(userId){
-    return Links.all(userId) //checkuser returns the userId
+.controller('ContactsCtrl', function($scope, Contacts, logStatus) {
+    $scope.contacts = [];
+    userId = 16; //localStorage.getItem('userid', response);
+    Contacts.all(userId) //checkuser returns the userId
     .then(function(response) {
-        $scope.links = response;
+        $scope.contacts = response;
     }
 )
 } 
-})
+)
 
 /*         
 .controller('ContactsCtrl', function($scope, Contacts) {
@@ -111,8 +110,8 @@ angular.module('starter.controllers', [])
 
 
 .controller('ContactDetailCtrl', function($scope, $stateParams, Contacts, logStatus) {
-  $scope.contact = Contacts.get($stateParams.contactId); 
-
+  $scope.contact = Contacts.get($stateParams.contactId);  
+  //$scop.loc = Contacts.getloca($scope.contact);
 })
 
 .controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus) {
