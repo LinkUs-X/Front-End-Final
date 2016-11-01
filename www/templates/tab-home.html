@@ -1,7 +1,7 @@
 <ion-view view-title="Home" class="dashboard">
   <ion-content class="padding">
 
-    <div ng-controller="HomeCtrl" ng-show="!isLogged">
+    <div ng-controller="StateCtrl" ng-show="!isLogged">
 
     	<button ng-controller="LoginCtrl" class="button button-block button-positive" ng-click="openModallogin()">
         Login
@@ -14,10 +14,11 @@
 	  </div>
 
     <img src="img/logo.png" class="logo" />
-      </div>
+
+    <div ng-controller="StateCtrl" ng-show="isLogged">
       <button class="button button-block button-positive">
         Make the Link !
       </button>
-      </div>
+    </div>
   </ion-content>
 </ion-view>

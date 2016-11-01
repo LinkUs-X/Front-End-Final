@@ -3,23 +3,22 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, logStatus) {
 
-  /*
-  localStorage.setItem('isLogged', false);
-  $scope.isLogged = JSON.parse(localStorage.getItem('isLogged'));
-  */
+})
 
-  /*
-  $scope.isLogged = logStatus.isLogged;
-  */
+.controller('StateCtrl', function($scope, $stateParams, $ionicModal, logStatus) {
 
+  $scope.logStatus = logStatus;
   $scope.isLogged = logStatus.isLogged;
-  $scope.$watch('isLogged', function () {
-    $scope.isLogged = logStatus.isLogged;
+
+  $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
+    if(newVal) { 
+      scope.isLogged = newVal;
+    }
   });
 
 })
 
-.controller('LoginCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus) {
+.controller('LoginCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
 
   // finduser
   $ionicModal.fromTemplateUrl('templates/modallogin.html', {
@@ -39,17 +38,29 @@ angular.module('starter.controllers', [])
   $scope.finduser = function(login, password) {
     return Users.finduser(login, password) //checkuser returns the userId
     .then(function(response) {
-      console.log("User", user);
+
+      //tests
       console.log(response);
+
+      //not used for now
       localStorage.setItem('userid', response);
       localStorage.setItem('isLogged', true);
-      /*
-      console.log(JSON.parse(localStorage.getItem('isLogged')));
-      */
-      $scope.closeModallogin();
+
+      // change logStatus
+      logStatus.isLogged = true;
+      // change currentId
+      currentId.userId = response;
+
     }).then(function(response){
-      logStatus.modifyStatus(true);
-      $scope.closeModalcreateuser();
+
+      //tests
+      console.log(logStatus.isLogged);
+      var testid = String(localStorage.getItem('userid'));
+      var testStatus = String(localStorage.getItem('isLogged'));
+      console.log("local Storage id:" + testid);
+      console.log('local Storage status:' + testStatus);
+
+      $scope.closeModallogin();
     })
     .then(undefined, function(error) {
         console.log('ERR services > Users : ', error.message);
@@ -57,7 +68,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('CreateCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus) {
+.controller('CreateCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
   // create user
   $ionicModal.fromTemplateUrl('templates/modalcreateuser.html', {
     scope: $scope,
@@ -76,37 +87,54 @@ angular.module('starter.controllers', [])
   $scope.createuser = function(login, password) {
     return Users.createuser(login, password)
     .then(function(response) {
+
+      //tests
       console.log("User", user);
       console.log(response);
+
+      //not used yet
       localStorage.setItem('userid', response);
       localStorage.setItem('isLogged', true);
-      logStatus.modifyStatus(true);
+
+      // change logStatus
+      logStatus.isLogged = true;
+      // change currentId
+      currentId.userId = response;
     }).then(function(response){
+
+      // tests
       console.log(logStatus.isLogged);
+
       $scope.closeModalcreateuser();
     });
   }
 })
 
-.controller('ContactsCtrl', function($scope, Contacts, logStatus) {
+.controller('ContactsCtrl', function($scope, Contacts, logStatus, currentId) {
     $scope.contacts = [];
-    userId = 16; //localStorage.getItem('userid', response);
+    // userId = currentId.userId; //localStorage.getItem('userid', response);
+    // userId = parseInt(localStrage.getItem('userid'));
+
+    /*
     Contacts.all(userId) //checkuser returns the userId
     .then(function(response) {
         $scope.contacts = response;
-    }
-)
-} 
-)
+    })
+    */
+    $scope.currentId = currentId;
+    $scope.userid = currentId.userId;
 
-/*         
-.controller('ContactsCtrl', function($scope, Contacts) {
-  $scope.contacts = Contacts.all();
-  })
-    
-*/
-
-
+    $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
+      if(newVal) {
+        console.log("hey" + newVal);
+        scope.userid = newVal;
+        Contacts.all(newVal) //checkuser returns the userId
+        .then(function(response) {
+          scope.contacts = response;
+        })
+      }
+    });
+}) 
 
 
 .controller('ContactDetailCtrl', function($scope, $stateParams, Contacts, logStatus) {

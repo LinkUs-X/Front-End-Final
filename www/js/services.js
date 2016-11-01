@@ -19,14 +19,34 @@ angular.module('starter.services', [])
 */
 .factory('logStatus', function ($http) {
   
-  var isLogged = false; // will be considered only on the first utilisation
+  var service = {
+    isLogged: false //default
+  };
 
+  return service;
+
+  /*
   return{
     modifyStatus: function(newStatus){  // will be considered only when called
       isLogged = newStatus;
     },
-    isLogged: isLogged
+    getStatus: function(){
+      isLogged: isLogged;
+      return isLogged;
+    },
+
+    // isLogged: isLogged
   };
+  */
+})
+
+.factory('currentId', function($http){
+
+  var service = {
+    userId: 16  //default
+  };
+
+  return service;
 })
 
 .factory('Users', function($http) {
@@ -44,22 +64,19 @@ angular.module('starter.services', [])
       },
 
       finduser: function(login, password) {
-        return $http.get("https://link-us-back.herokuapp.com/users.json", 
-          {user: {login: login, password: password}}).then(function(response){
+        var userId = -1; // default value for now
+        return $http.get("https://link-us-back.herokuapp.com/users.json"/*, 
+          {user: {login: login, password: password}}*/).then(function(response){
             users = response.data;
-            var userId = -1; // default value for now
             for (var i = 0; i < users.length; i++) {
-              if (users[i].login  === login) {
+              if (users[i].login  === login && users[i].password  === password) {
               userId = users[i].id;
               user = users[i];
-              alert(userId + ", " + i);
+              return userId;
               }
             }
-            return userId;
-        }).then(function(response){
-            // find the right user with corresponding login
-            return userId;
-          })
+            return -1;
+        })
       }
     
     }
@@ -107,8 +124,70 @@ angular.module('starter.services', [])
       .then(undefined, function(error) {
         console.log('ERR services > Cards : ', error.message);
       });
-    }
+    },
+    all: function(userId) {
+      return $http.get("https://link-us-back.herokuapp.com/cards.json"). 
+      //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
+      then(function(response){
+        cards = response.data.cards;
+        var personalCards = [];
+        for(var i = 0; i < cards.length; i++) {
+          if(cards[i].user_id===userId) {
+            personalCards.push(cards[i]);
+          }
+        }
+        return personalCards;
+      })
+    },
   }
+})
+
+.factory('Contacts', function($http) {
+
+  var contacts = [];
+
+    return {
+
+      all: function(userId) {
+        return $http.get("https://link-us-back.herokuapp.com/users/" + userId + "/showlinksbyuser.json"). 
+          //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
+          then(function(response){
+            contacts = response.data;
+            contacts = contacts.links;
+            return contacts; 
+            })
+            
+        },
+               
+      get: function(contactId) {
+      for (var i = 0; i < contacts.length; i++) {
+        if (contacts[i].card_id === parseInt(contactId)) {
+          return contacts[i];
+        }
+      }
+      return null;
+       },
+      /*
+      getloca: function(contact) {
+            var loc = "";
+            geocoder = new google.maps.Geocoder();
+            var lat = 41.32;
+            var lng = 3.21;
+          
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                       loc =  "Location: " + results[1].formatted_address;
+                        
+                    }
+                }
+            });
+            
+      return loc;
+      }
+      */
+    }
 })
 
 /*
@@ -226,16 +305,16 @@ angular.module('starter.services', [])
             return contacts; 
             })
             
-        },
+      },
                
-       get: function(contactId) {
-      for (var i = 0; i < contacts.length; i++) {
-        if (contacts[i].card_id === parseInt(contactId)) {
-          return contacts[i];
+      get: function(contactId) {
+        for (var i = 0; i < contacts.length; i++) {
+          if (contacts[i].card_id === parseInt(contactId)) {
+            return contacts[i];
+          }
         }
-      }
       return null;
-       },
+      },
       /*
       getloca: function(contact) {
             var loc = "";
