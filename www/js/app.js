@@ -78,6 +78,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+    
     .state('tab.card-detail', {
     url: '/account/:cardId',
     views: {

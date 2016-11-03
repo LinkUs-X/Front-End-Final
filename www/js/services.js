@@ -91,7 +91,7 @@ angular.module('starter.services', [])
 
   return {
     createcard: function(card_name, first_name, last_name, phone_nbr, facebook_link,
-      linkedin_link, email, street, city, postal_code, country, description, picture_url) {
+      linkedin_link, email, street, city, postal_code, country, description, picture_url, userId) {
 
         console.log("hey jude" + userId);
 
@@ -110,6 +110,8 @@ angular.module('starter.services', [])
     all: function(userId) {
       return $http.get("https://link-us-back.herokuapp.com/cards.json"). 
       then(function(response){
+
+        cards = [];
         cards_data = response.data;
         cards_data = cards_data.cards;
 
@@ -120,10 +122,12 @@ angular.module('starter.services', [])
             console.log("good news" + cards_data[i].user_id);
           }
         }
+
         console.log(cards);
         return cards;
       })
     },
+    /*
     get: function(cardId) {
       return $http.get("https://link-us-back.herokuapp.com/cards.json"). 
       then(function(response){
@@ -131,12 +135,25 @@ angular.module('starter.services', [])
         cards_data = cards_data.cards;
         for(var i = 0; i < cards_data.length; i++) {
           if(cards_data[i].id===cardId) {
-            return cards_data[i];
+            cards = cards_data[i];
+            return cards;
           }
         }
         return null;
       })
     },
+    
+    */
+    get: function(cardId) {
+      for (var i = 0; i < cards.length; i++) {
+        if (cards[i].id === parseInt(cardId)) {
+          console.log("lolilol" + cards[i].user_id)
+          return cards[i];
+        }
+      }
+      return null;
+       },
+  
   }
 })
 

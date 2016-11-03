@@ -148,11 +148,13 @@ angular.module('starter.controllers', [])
 
   $scope.currentId = currentId;
   $scope.userid = currentId.userId;
+  var userId = currentId.userId;
 
     $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
       if(newVal) {
         // console.log("hey" + newVal);
         scope.userid = newVal;
+        userId = newVal;
         Cards.all(newVal) //checkuser returns the userId
         .then(function(response) {
           scope.cards = response;
@@ -180,16 +182,29 @@ angular.module('starter.controllers', [])
         linkedin_link, email, street, city, postal_code, country, description, picture_url) {
 
     return Cards.createcard(card_name, first_name, last_name, phone_nbr, facebook_link, 
-        linkedin_link, email, street, city, postal_code, country, description, picture_url)
+        linkedin_link, email, street, city, postal_code, country, description, picture_url, userId)
     .then(function(response) {
       console.log("Card", card);
       alert("New card has been created ");
       $scope.closeModalcreatecard();
+
+      $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
+      if(newVal) {
+        // console.log("hey" + newVal);
+        scope.userid = newVal;
+        userId = newVal;
+        Cards.all(newVal) //checkuser returns the userId
+        .then(function(response) {
+          scope.cards = response;
+        })
+      }
+    });
+
     })
   }
 })
 
 .controller('CardDetailCtrl', function($scope, $stateParams, Cards, logStatus) {
   $scope.card = Cards.get($stateParams.cardId);  
-  //$scop.loc = Contacts.getloca($scope.contact);
-});
+  
+})
