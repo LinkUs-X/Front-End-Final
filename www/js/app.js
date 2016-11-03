@@ -60,7 +60,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('tab.contacts-detail', {
-      url: '/contacts/:contactId',
+      url: '/contacts/:contactCardId',
       views: {
         'tab-contacts': {
           templateUrl: 'templates/contact-detail.html',

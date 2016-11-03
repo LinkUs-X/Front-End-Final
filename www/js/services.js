@@ -90,35 +90,17 @@ angular.module('starter.services', [])
   var cards = [];
 
   return {
-    createcard: function(login, password, card_name, first_name, last_name, phone_nbr, facebook_link,
+    createcard: function(card_name, first_name, last_name, phone_nbr, facebook_link,
       linkedin_link, email, street, city, postal_code, country, description, picture_url) {
 
-      // find the user id: make a $http.get to find out which userId corresponds to login and password
-      // 1. get the whole json of all users 2. iterate to find the matching login 3. assign the userId accordingly
-      var userId = 0; // default value for now
-      return $http.get("https://link-us-back.herokuapp.com/users.json")
-      .then(function(response) {
-        users = response.data;
-        for (var i = 0; i < users.length; i++) {
-          if (users[i].login  === login) {
-          userId = users[i].id;
-          alert(userId + ", " + i);
-          }
-        }
-        if(userId === 0){
-          alert("wrong login");
-          userId = 1;
-        }
-      })
-      .then(function(response) {
-        // here I have to find a way to stall in order to wait to find the right userId
+        console.log("hey jude" + userId);
+
         return $http.post("https://link-us-back.herokuapp.com/users/" + userId + "/createcard.json",
           {card: {card_name: card_name, first_name: first_name, last_name: last_name, phone_nbr: phone_nbr,
           facebook_link: facebook_link, linkedin_link: linkedin_link, email: email, street: street, city: city,
           postal_code: postal_code, country: country, description: description, picture_url: picture_url}})
-      })
-      .then(function(response2) {
-        card = response2.data;
+      .then(function(response) {
+        card = response.data;
         return card;
       })
       .then(undefined, function(error) {
@@ -127,25 +109,29 @@ angular.module('starter.services', [])
     },
     all: function(userId) {
       return $http.get("https://link-us-back.herokuapp.com/cards.json"). 
-      //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
       then(function(response){
-        cards = response.data.cards;
-        for(var i = 0; i < cards.length; i++) {
-          if(cards[i].user_id===userId) {
-            cards.push(cards[i]);
+        cards_data = response.data;
+        cards_data = cards_data.cards;
+
+        for(var i = 0; i < cards_data.length; i++) {
+          console.log(cards_data[i].user_id);
+          if(cards_data[i].user_id===userId) {
+            cards.push(cards_data[i]);
+            console.log("good news" + cards_data[i].user_id);
           }
         }
+        console.log(cards);
         return cards;
       })
     },
     get: function(cardId) {
       return $http.get("https://link-us-back.herokuapp.com/cards.json"). 
-      //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
       then(function(response){
-        cards = response.data.cards;
-        for(var i = 0; i < cards.length; i++) {
-          if(cards[i].card_id===cardId) {
-            return cards[i];
+        cards_data = response.data;
+        cards_data = cards_data.cards;
+        for(var i = 0; i < cards_data.length; i++) {
+          if(cards_data[i].id===cardId) {
+            return cards_data[i];
           }
         }
         return null;
@@ -171,9 +157,9 @@ angular.module('starter.services', [])
             
         },
                
-      get: function(contactId) {
+      get: function(contactCardId) {
       for (var i = 0; i < contacts.length; i++) {
-        if (contacts[i].card_id === parseInt(contactId)) {
+        if (contacts[i].card_id === parseInt(contactCardId)) {
           return contacts[i];
         }
       }

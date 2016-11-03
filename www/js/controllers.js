@@ -138,7 +138,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('ContactDetailCtrl', function($scope, $stateParams, Contacts, logStatus) {
-  $scope.contact = Contacts.get($stateParams.contactId);  
+  $scope.contact = Contacts.get($stateParams.contactCardId);  
   //$scop.loc = Contacts.getloca($scope.contact);
 })
 
@@ -176,10 +176,10 @@ angular.module('starter.controllers', [])
     $scope.modalcreatecard.hide();
   };
 
-  $scope.createcard = function(login, password, card_name, first_name, last_name, phone_nbr, facebook_link, 
+  $scope.createcard = function(card_name, first_name, last_name, phone_nbr, facebook_link, 
         linkedin_link, email, street, city, postal_code, country, description, picture_url) {
 
-    return Cards.createcard(login, password, card_name, first_name, last_name, phone_nbr, facebook_link, 
+    return Cards.createcard(card_name, first_name, last_name, phone_nbr, facebook_link, 
         linkedin_link, email, street, city, postal_code, country, description, picture_url)
     .then(function(response) {
       console.log("Card", card);
