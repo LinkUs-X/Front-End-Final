@@ -130,13 +130,25 @@ angular.module('starter.services', [])
       //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
       then(function(response){
         cards = response.data.cards;
-        var personalCards = [];
         for(var i = 0; i < cards.length; i++) {
           if(cards[i].user_id===userId) {
-            personalCards.push(cards[i]);
+            cards.push(cards[i]);
           }
         }
-        return personalCards;
+        return cards;
+      })
+    },
+    get: function(cardId) {
+      return $http.get("https://link-us-back.herokuapp.com/cards.json"). 
+      //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
+      then(function(response){
+        cards = response.data.cards;
+        for(var i = 0; i < cards.length; i++) {
+          if(cards[i].card_id===cardId) {
+            return cards[i];
+          }
+        }
+        return null;
       })
     },
   }

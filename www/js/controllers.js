@@ -126,7 +126,7 @@ angular.module('starter.controllers', [])
 
     $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
       if(newVal) {
-        console.log("hey" + newVal);
+        // console.log("hey" + newVal);
         scope.userid = newVal;
         Contacts.all(newVal) //checkuser returns the userId
         .then(function(response) {
@@ -142,7 +142,24 @@ angular.module('starter.controllers', [])
   //$scop.loc = Contacts.getloca($scope.contact);
 })
 
-.controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus) {
+.controller('AccountCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
+
+  $scope.cards = [];
+
+  $scope.currentId = currentId;
+  $scope.userid = currentId.userId;
+
+    $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
+      if(newVal) {
+        // console.log("hey" + newVal);
+        scope.userid = newVal;
+        Cards.all(newVal) //checkuser returns the userId
+        .then(function(response) {
+          scope.cards = response;
+        })
+      }
+    });
+
 
   $ionicModal.fromTemplateUrl('templates/modalcreatecard.html', {
   scope: $scope,
@@ -170,4 +187,9 @@ angular.module('starter.controllers', [])
       $scope.closeModalcreatecard();
     })
   }
+})
+
+.controller('CardDetailCtrl', function($scope, $stateParams, Cards, logStatus) {
+  $scope.card = Cards.get($stateParams.cardId);  
+  //$scop.loc = Contacts.getloca($scope.contact);
 });
