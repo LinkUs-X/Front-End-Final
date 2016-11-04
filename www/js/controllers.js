@@ -185,10 +185,9 @@ angular.module('starter.controllers', [])
         linkedin_link, email, street, city, postal_code, country, description, picture_url, userId)
     .then(function(response) {
       console.log("Card", card);
-      alert("New card has been created ");
       $scope.closeModalcreatecard();
 
-      $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
+      $scope.$watch('currentId.userId', function (newVal, oldVal, scope) { // modification de currrentId.userId -> appelle le callback function
       if(newVal) {
         // console.log("hey" + newVal);
         scope.userid = newVal;
