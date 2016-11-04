@@ -82,7 +82,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.account-detail', {
     url: '/account/:cardId',
     views: {
-      'tab-cards': {
+      'tab-account': {
         templateUrl: 'templates/account-detail.html',
         controller: 'CardDetailCtrl'
       }

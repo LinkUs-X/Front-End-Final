@@ -110,16 +110,22 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('LinkCtrl', function($scope, $stateParams, $ionicModal, Cards, logStatus, currentId) {
+.controller('LinkCtrl', function($scope, $stateParams, $ionicModal, Cards, logStatus, currentId, Links) {
+
+  $scope.cards = [];
 
   $scope.currentId = currentId;
   $scope.userid = currentId.userId;
-  userid = currentId.userId;
+  var userid = currentId.userId;
 
   $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
     if(newVal) {
       scope.userid = newVal;
       userid = newVal;
+      Cards.all(newVal)
+      .then(function(response){
+        scope.cards = response;
+      })
     }
   });
 
@@ -140,9 +146,12 @@ angular.module('starter.controllers', [])
 
   $scope.linkus = function(myCardId) {
     return Links.createlink(myCardId, userid)
+
+    /*
     .then(function(response) {
       return 1;
-    });
+    })*/;
+
   }
 })
 
@@ -241,5 +250,4 @@ angular.module('starter.controllers', [])
 
 .controller('CardDetailCtrl', function($scope, $stateParams, Cards, logStatus) {
   $scope.card = Cards.get($stateParams.cardId);  
-  
 })
