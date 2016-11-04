@@ -145,8 +145,8 @@ angular.module('starter.controllers', [])
   };
 
   $scope.linkus = function(myCardId) {
+    $scope.closeModallinkus();
     return Links.createlink(myCardId, userid)
-
     /*
     .then(function(response) {
       return 1;
