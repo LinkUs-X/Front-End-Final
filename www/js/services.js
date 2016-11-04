@@ -67,23 +67,16 @@ angular.module('starter.services', [])
 
 })
 
-
-/*
 .factory('Links', function($http) {
 
   var links = [];
 
     return {
-      createlink: function(login, login_new_contact) {
-        return $http.post("https://link-us-back.herokuapp.com/users/createuser.json", 
-          {user: {login: login, password: password}}).then(function(response){
-            user = response.data;
-            return user;
-        })
+      createlink: function(myCardId, userid) {
+        return 1; //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
       }
   }
 })
-*/
 
 .factory('Contacts', function($http) {
 

@@ -110,6 +110,42 @@ angular.module('starter.controllers', [])
   }
 })
 
+.controller('LinkCtrl', function($scope, $stateParams, $ionicModal, Cards, logStatus, currentId) {
+
+  $scope.currentId = currentId;
+  $scope.userid = currentId.userId;
+  userid = currentId.userId;
+
+  $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
+    if(newVal) {
+      scope.userid = newVal;
+      userid = newVal;
+    }
+  });
+
+  // create user
+  $ionicModal.fromTemplateUrl('templates/modallinkus.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modallinkus = modal;
+  });
+
+  $scope.openModallinkus = function() {
+    $scope.modallinkus.show();
+  };
+  $scope.closeModallinkus = function() {
+    $scope.modallinkus.hide();
+  };
+
+  $scope.linkus = function(myCardId) {
+    return Links.createlink(myCardId, userid)
+    .then(function(response) {
+      return 1;
+    });
+  }
+})
+
 .controller('ContactsCtrl', function($scope, Contacts, logStatus, currentId) {
     $scope.contacts = [];
     // userId = currentId.userId; //localStorage.getItem('userid', response);

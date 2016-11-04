@@ -16,7 +16,7 @@
     <img src="img/logo.png" class="logo" />
 
     <div ng-controller="StateCtrl" ng-show="isLogged">
-      <button class="button button-block button-positive">
+      <button ng-controller="LinkCtrl" class="button button-block button-positive" ng-click="openModallinkus()">
         Make the Link !
       </button>
     </div>
