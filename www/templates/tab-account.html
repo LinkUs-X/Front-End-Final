@@ -1,29 +1,34 @@
 <ion-view view-title="Account">
-  <div ng-controller="StateCtrl" ng-show="isLogged">  
+
+  <div ng-controller="StateCtrl" ng-show="isLogged"> 
+
    <ion-header-bar class="bar bar-subheader item-input-inset">
       <label class="item-input-wrapper search">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="text" placeholder="Search..." ng-model="searchValue" ng-keyup="val=searchValue" />     
-      </label>
-       
+      </label>  
  </ion-header-bar>            
             
   <ion-content>
-  
     <button class="button button-block button-positive" ng-click="openModalcreatecard()">
 		  Create card
 	  </button>
-  
+
+    <button class="button button-block button-positive" ng-click="logout()" >
+      Log Out
+    </button>
+
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="card in cards | filter:val" type="item-text-wrap" href="#/tab/account/{{card.id}}">
         <!-- <img ng-src="{{card.face}}"> -->
         <h2>{{card.card_name}}</h2>
-        <p> {{card.first_name}} {{card.last_name}} </p>
          
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
 
   </ion-content>
+
   </div>
+
 </ion-view>

@@ -20,7 +20,7 @@
  -->    
     <div class="list card">
 
-  <div class="item item-avatar">
+  <div class="item-text-wrap item item-avatar">
     <!--<img src="mcfly.jpg">-->
     <h2>{{contact.card.first_name}} {{contact.card.last_name}}</h2>
     <p> {{contact.created_at}}</p> 
@@ -32,7 +32,7 @@
   <a class="item item-icon-left" href="#">
     <i class="icon ion-email"></i>
     Mail
-      <span class="item-note">
+      <span class="item-text-wrap item-note">
       {{contact.card.emaill}} 
        </span>
   </a>
@@ -40,7 +40,7 @@
   <a class="item item-icon-left item-icon-right">
     <i class="icon ion-ios-telephone"></i>
       Phone
-     <span class="item-note">
+     <span class="item-text-wrap item-note">
          {{contact.card.phone_nbr}}
        </span>   
   </a>
@@ -64,7 +64,7 @@
       <a class="item item-icon-left" href="#">
     <i class="icon ion-android-pin"></i>
           Adress
-     <span class="item-note" >
+     <span class="item-text-wrap item-note" >
          {{contact.card.street}},{{contact.card.postal_code}},{{contact.card.city}},{{contact.card.country}}
        </span> 
   </a>

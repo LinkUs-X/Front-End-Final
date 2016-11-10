@@ -16,6 +16,9 @@ angular.module('starter.controllers', [])
     }
   });
 
+  $scope.logout = function() {
+    logStatus.isLogged = false;
+  };
 })
 
 .controller('LoginCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
@@ -66,6 +69,7 @@ angular.module('starter.controllers', [])
         console.log('ERR services > Users : ', error.message);
     });
   }
+
 })
 
 .controller('CreateCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
@@ -207,6 +211,13 @@ angular.module('starter.controllers', [])
       }
     });
 
+    /*
+  $scope.logout = function() {
+    logStatus.isLogged = false;
+    currentId.userId = -1;
+  };
+  */
+
 
   $ionicModal.fromTemplateUrl('templates/modalcreatecard.html', {
   scope: $scope,
@@ -246,6 +257,7 @@ angular.module('starter.controllers', [])
 
     })
   }
+
 })
 
 .controller('CardDetailCtrl', function($scope, $stateParams, Cards, logStatus) {

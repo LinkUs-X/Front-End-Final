@@ -73,7 +73,7 @@ angular.module('starter.services', [])
 
     return {
       createlink: function(myCardId, userid) {
-        return 1; //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
+        return $http.get("https://link-us-back.herokuapp.com/users/" + myCardId + "/createrequest.json"); //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
       },
     }
 })
