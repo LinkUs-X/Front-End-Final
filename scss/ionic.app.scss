@@ -21,3 +21,31 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+ 
+  25% {
+    -webkit-transform: translate3d(0,-30%,0);
+  }
+ 
+  50% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+ 
+  75% {
+    -webkit-transform: translate3d(0,-30%,0);
+  }
+ 
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+ 
+.bounce-animation {
+  -webkit-animation: bounce ease-in 1; 
+  animation: bounce ease-in 1;
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
+}

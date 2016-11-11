@@ -1,13 +1,15 @@
 <ion-view view-title="Home" class="dashboard">
   <ion-content class="padding">
-
+      
+      
     <div ng-controller="StateCtrl" ng-show="!isLogged">
 
-    	<button ng-controller="LoginCtrl" class="button button-block button-positive" ng-click="openModallogin()">
+         
+    	<button ng-controller="LoginCtrl" class="button button-outline button-positive button button-full" ng-click="openModallogin()">
         Login
       </button>
 
-    	<button ng-controller="CreateCtrl" class="button button-block button-positive" ng-click="openModalcreateuser()">
+    	<button ng-controller="CreateCtrl" class="button button-outline button-positive button-full" ng-click="openModalcreateuser()">
 		    Create account
 		  </button>
 
@@ -16,9 +18,11 @@
     <img src="img/logo.png" class="logo" />
 
     <div ng-controller="StateCtrl" ng-show="isLogged">
-      <button ng-controller="LinkCtrl" class="button button-block button-positive" ng-click="openModallinkus()">
-        Make the Link !
+        
+      <button ng-controller="LinkCtrl" class="button button-outline button-positive button-full" ng-click="openModallinkus()">
+        Make the Link ! 
       </button>
+      
     </div>
   </ion-content>
 </ion-view>

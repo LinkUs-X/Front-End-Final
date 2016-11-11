@@ -175,8 +175,9 @@ angular.module('starter.controllers', [])
 
     $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
       if(newVal) {
-        // console.log("hey" + newVal);
-        scope.userid = newVal;
+         console.log("hey" + newVal);
+        
+        $scope.userid = newVal;
         Contacts.all(newVal) //checkuser returns the userId
         .then(function(response) {
           scope.contacts = response;

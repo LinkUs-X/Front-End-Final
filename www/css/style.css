@@ -1,3 +1,10 @@
 /* Empty. Add your own CSS if you like */ img.logo { width: 100%; }
 
 .dashboard h2 { color: blue; }
+
+
+.spinner svg {
+  text-align: center;
+  width: 50% !important;
+  height: 200px !important;
+}

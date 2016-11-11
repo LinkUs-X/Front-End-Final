@@ -19,9 +19,10 @@
     </button>
 
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="card in cards | filter:val" type="item-text-wrap" href="#/tab/account/{{card.id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right 'bounce-animation' : 'animate-in-primary'" ng-repeat="card in cards | filter:val" type="item-text-wrap" href="#/tab/account/{{card.id}}">
         <!-- <img ng-src="{{card.face}}"> -->
-        <h2>{{card.card_name}}</h2>
+        
+          <h2>{{card.card_name}}</h2>
          
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
