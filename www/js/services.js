@@ -73,7 +73,7 @@ angular.module('starter.services', [])
 
     return {
       createlink: function(myCardId, userid) {
-        return $http.get("https://link-us-back.herokuapp.com/users/" + myCardId + "/createrequest.json"); //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
+        return $http.post("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest.json", {link_request: {card_id: myCardId, lat: 48.713549, lng: 2.215676} }); //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
       },
     }
 })

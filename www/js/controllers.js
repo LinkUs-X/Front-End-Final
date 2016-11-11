@@ -16,9 +16,6 @@ angular.module('starter.controllers', [])
     }
   });
 
-  $scope.logout = function() {
-    logStatus.isLogged = false;
-  };
 })
 
 .controller('LoginCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
@@ -149,8 +146,14 @@ angular.module('starter.controllers', [])
   };
 
   $scope.linkus = function(myCardId) {
-    $scope.closeModallinkus();
-    return Links.createlink(myCardId, userid)
+    console.log("Hey man, my card Id: "+myCardId);
+    console.log("Hey man, user id: " +userid);
+    return Links.createlink(myCardId, userid).
+    then(function(response){
+      console.log(response);
+      $scope.closeModallinkus();
+    })
+
     /*
     .then(function(response) {
       return 1;
@@ -212,13 +215,11 @@ angular.module('starter.controllers', [])
       }
     });
 
-    /*
-  $scope.logout = function() {
-    logStatus.isLogged = false;
-    currentId.userId = -1;
-  };
-  */
-
+    $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
+      if(newVal) { 
+      scope.isLogged = newVal;
+    }
+    });
 
   $ionicModal.fromTemplateUrl('templates/modalcreatecard.html', {
   scope: $scope,
@@ -260,6 +261,53 @@ angular.module('starter.controllers', [])
   }
 
 })
+
+.controller('LogoutCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
+
+  $ionicModal.fromTemplateUrl('templates/modallogout.html', {
+  scope: $scope,
+  animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modallogout = modal;
+  });
+
+    // create card
+  $scope.openModallogout = function() {
+    $scope.modallogout.show();
+  };
+  $scope.closeModallogout = function() {
+    $scope.modallogout.hide();
+  };
+
+  $scope.logout = function() {
+
+      logStatus.isLogged = false;
+      currentId.userId = -1;
+
+      $scope.closeModallogout();
+
+      $scope.$watch('currentId.userId', function (newVal, oldVal, scope) { // modification de currrentId.userId -> appelle le callback function
+      if(newVal) {
+        // console.log("hey" + newVal);
+        scope.userid = newVal;
+        userId = newVal;
+        Cards.all(newVal) //checkuser returns the userId
+        .then(function(response) {
+          scope.cards = response;
+        })
+      }
+    });
+
+      $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
+      if(newVal) { 
+      scope.isLogged = newVal;
+    }
+
+    });
+  }
+
+})
+
 
 .controller('CardDetailCtrl', function($scope, $stateParams, Cards, logStatus) {
   $scope.card = Cards.get($stateParams.cardId);  
