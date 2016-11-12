@@ -91,8 +91,8 @@ angular.module('starter.services', [])
           contacts = response.data;
           contacts = contacts.links;
           console.log("contacts:" + JSON.stringify(contacts));
-        })
-          return contacts; 
+          return contacts;
+        }) 
         },
                
       get: function(contactCardId) {
