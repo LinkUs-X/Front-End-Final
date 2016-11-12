@@ -130,6 +130,7 @@ angular.module('starter.controllers', [])
     }
   });
 
+
   // create user
   $ionicModal.fromTemplateUrl('templates/modallinkus.html', {
     scope: $scope,
@@ -139,6 +140,18 @@ angular.module('starter.controllers', [])
   });
 
   $scope.openModallinkus = function() {
+
+  $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
+    if(newVal) {
+      scope.userid = newVal;
+      userid = newVal;
+      Cards.all(newVal)
+      .then(function(response){
+        scope.cards = response;
+      })
+    }
+  });
+
     $scope.modallinkus.show();
   };
   $scope.closeModallinkus = function() {
@@ -276,6 +289,25 @@ angular.module('starter.controllers', [])
     $scope.modallogout.show();
   };
   $scope.closeModallogout = function() {
+
+    $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
+      if(newVal) { 
+      scope.isLogged = newVal;
+      }
+    });
+
+    $scope.$watch('currentId.userId', function (newVal, oldVal, scope) { // modification de currrentId.userId -> appelle le callback function
+      if(newVal) {
+        // console.log("hey" + newVal);
+        scope.userid = newVal;
+        userId = newVal;
+        Cards.all(newVal) //checkuser returns the userId
+        .then(function(response) {
+          scope.cards = response;
+        })
+      }
+    });
+
     $scope.modallogout.hide();
   };
 
@@ -284,7 +316,7 @@ angular.module('starter.controllers', [])
       logStatus.isLogged = false;
       currentId.userId = -1;
 
-      $scope.closeModallogout();
+
 
       $scope.$watch('currentId.userId', function (newVal, oldVal, scope) { // modification de currrentId.userId -> appelle le callback function
       if(newVal) {
@@ -304,6 +336,9 @@ angular.module('starter.controllers', [])
     }
 
     });
+
+    $scope.closeModallogout();
+
   }
 
 })
