@@ -129,7 +129,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('LinkCtrl', function($scope, $stateParams, $ionicModal, Cards, logStatus, currentId, Links) {
+.controller('LinkCtrl', function($scope, $stateParams, $ionicModal, Cards, logStatus, currentId, Links,$cordovaGeolocation) {
 
   $scope.cards = [];
 
@@ -177,9 +177,24 @@ angular.module('starter.controllers', [])
   };
 
   $scope.linkus = function(myCardId) {
+    
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    
+   $cordovaGeolocation
+   .getCurrentPosition(posOptions)	
+   .then(function (position) {
+      var lat  = position.coords.latitude
+      var long = position.coords.longitude
+      console.log(lat + '   ' + long)
+      $scope.lati = lat
+      $scope.lng=long
+   }, function(err) {
+      console.log(err)
+   });
+      
     console.log("Hey man, my card Id: "+myCardId);
     console.log("Hey man, user id: " +userid);
-    return Links.createlink(myCardId, userid).
+    return Links.createlink(myCardId, userid,lati,lng).
     then(function(response){
       console.log(response);
       $scope.closeModallinkus();
@@ -381,4 +396,44 @@ angular.module('starter.controllers', [])
 
 .controller('CardDetailCtrl', function($scope, $stateParams, Cards, logStatus) {
   $scope.card = Cards.get($stateParams.cardId);  
+})
+
+
+.controller('GeoCtrl', function($scope, $cordovaGeolocation) {
+    
+   var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    
+   $cordovaGeolocation
+   .getCurrentPosition(posOptions)
+	
+   .then(function (position) {
+      var lat  = position.coords.latitude
+      var long = position.coords.longitude
+      console.log(lat + '   ' + long)
+      $scope.lat = lat
+      $scope.lng=long
+   }, function(err) {
+      console.log(err)
+   });
+
+   var watchOptions = {timeout : 3000, enableHighAccuracy: false};
+   var watch = $cordovaGeolocation.watchPosition(watchOptions);
+	
+   watch.then(
+      null,
+		
+      function(err) {
+         console.log(err)
+      },
+		
+      function(position) {
+         var lat  = position.coords.latitude
+         var long = position.coords.longitude
+         console.log(lat + '' + long)
+         
+      }
+   );
+
+   watch.clearWatch();
+
 })

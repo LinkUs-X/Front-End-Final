@@ -27,7 +27,7 @@ angular.module('starter.services', [])
 .factory('currentId', function($http){
 
   var service = {
-    userId: 16  //default
+    userId: -1  //default
   };
 
   return service;
@@ -72,8 +72,8 @@ angular.module('starter.services', [])
   var links = [];
 
     return {
-      createlink: function(myCardId, userid) {
-        return $http.post("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest.json", {link_request: {card_id: myCardId, lat: 48.713549, lng: 2.215676} }); //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
+      createlink: function(myCardId, userid,lati,lng) {
+        return $http.post("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest.json", {link_request: {card_id: myCardId, lat: lati, lng: lng} }); //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
       },
     }
 })
