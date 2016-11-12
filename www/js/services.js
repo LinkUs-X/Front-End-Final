@@ -86,13 +86,13 @@ angular.module('starter.services', [])
 
       all: function(userId) {
         return $http.get("https://link-us-back.herokuapp.com/users/" + userId + "/showlinksbyuser.json"). 
-          //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
-          then(function(response){
-            contacts = response.data;
-            contacts = contacts.links;
-            return contacts; 
-            })
-            
+        //return $http.get("https://api-shows-tonight.herokuapp.com/shows.json").
+        then(function(response){
+          contacts = response.data;
+          contacts = contacts.links;
+          console.log("contacts:" + JSON.stringify(contacts));
+        })
+          return contacts; 
         },
                
       get: function(contactCardId) {

@@ -1,8 +1,26 @@
 angular.module('starter.controllers', [])
 
+.controller('TabCtrl', function($scope, $stateParams, $ionicModal, logStatus) {
+    $scope.logStatus = logStatus;
+    $scope.isLogged = logStatus.isLogged;
+
+    $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
+      if(newVal) { 
+        scope.isLogged = newVal;
+      }
+    });
+})
+
 
 .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, logStatus) {
+    $scope.logStatus = logStatus;
+    $scope.isLogged = logStatus.isLogged;
 
+    $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
+      if(newVal) { 
+        scope.isLogged = newVal;
+      }
+    });
 })
 
 .controller('StateCtrl', function($scope, $stateParams, $ionicModal, logStatus) {
@@ -175,7 +193,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('ContactsCtrl', function($scope, Contacts, logStatus, currentId) {
+.controller('ContactsCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, Contacts, logStatus, currentId) {
     $scope.contacts = [];
     // userId = currentId.userId; //localStorage.getItem('userid', response);
     // userId = parseInt(localStrage.getItem('userid'));
@@ -186,6 +204,16 @@ angular.module('starter.controllers', [])
         $scope.contacts = response;
     })
     */
+
+    $scope.logStatus = logStatus;
+    $scope.isLogged = logStatus.isLogged;
+
+    $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
+      if(newVal) { 
+        scope.isLogged = newVal;
+      }
+    });
+
     $scope.currentId = currentId;
     $scope.userid = currentId.userId;
 
@@ -200,6 +228,7 @@ angular.module('starter.controllers', [])
         })
       }
     });
+
 }) 
 
 
@@ -228,10 +257,13 @@ angular.module('starter.controllers', [])
       }
     });
 
+    $scope.logStatus = logStatus;
+    $scope.isLogged = logStatus.isLogged;
+
     $scope.$watch('logStatus.isLogged', function (newVal, oldVal, scope) {
       if(newVal) { 
-      scope.isLogged = newVal;
-    }
+        scope.isLogged = newVal;
+      }
     });
 
   $ionicModal.fromTemplateUrl('templates/modalcreatecard.html', {
@@ -276,6 +308,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('LogoutCtrl', function($scope, $stateParams, $ionicModal, Users, Cards, logStatus, currentId) {
+
+  $scope.logStatus = logStatus;
+  $scope.isLogged = logStatus.isLogged;
 
   $ionicModal.fromTemplateUrl('templates/modallogout.html', {
   scope: $scope,
