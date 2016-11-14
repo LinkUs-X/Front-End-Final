@@ -16,7 +16,7 @@
 
       <ion-list>
         <ion-item class="item-remove-animate item-avatar item-icon-right 'bounce-animation' : 'animate-in-primary'" ng-repeat="card in cards | filter:val" type="item-text-wrap" href="#/tab/account/{{card.id}}">
-          <!-- <img ng-src="{{card.face}}"> -->
+          <img ng-src="{{card.picture_url}}">
 
           <h2>{{card.card_name}}</h2>
 

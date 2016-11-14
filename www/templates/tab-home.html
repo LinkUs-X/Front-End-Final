@@ -1,11 +1,7 @@
 <ion-view view-title="Home" class="dashboard">
   <ion-content class="padding">
 
-    <div ng-controller="GeoCtrl">
-      <button ng-controller="LoginCtrl" class="button button-outline button-positive button-full" ng-click="openModallogin()">
-        Login {{lat}} , {{lng}}
-      </button>
-    </div>
+    
 
     <div ng-controller="StateCtrl" ng-if="!logStatus.isLogged">
       <button ng-controller="LoginCtrl" class="button button-outline button-positive button-full" ng-click="openModallogin()">

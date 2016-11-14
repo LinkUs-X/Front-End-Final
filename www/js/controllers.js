@@ -125,7 +125,20 @@ angular.module('starter.controllers', [])
     }
   });
 
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
 
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+      var lat  = position.coords.latitude;
+      var long = position.coords.longitude;
+      console.log(lat + '   ' + long);
+      $scope.lati = lat;
+      $scope.lng = long;
+    }, function(err) {
+      console.log(err);
+    });
+    
   // create user
   $ionicModal.fromTemplateUrl('templates/modallinkus.html', {
     scope: $scope,
