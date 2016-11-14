@@ -27,7 +27,7 @@ angular.module('starter.services', [])
 .factory('currentId', function($http){
 
   var service = {
-    userId: -1  //default
+    userId: 16  //default
   };
 
   return service;
@@ -72,7 +72,7 @@ angular.module('starter.services', [])
   var links = [];
 
     return {
-      createlink: function(myCardId, userid,lati,lng) {
+      createlink: function(myCardId, userid, lati,lng) {
         return $http.post("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest.json", {link_request: {card_id: myCardId, lat: lati, lng: lng} }); //return instruction to create a link of which take: return  $http.get("https://link-us-back.herokuapp.com/users/" + userid + "/createrequest")
       },
     }

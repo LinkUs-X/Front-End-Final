@@ -183,18 +183,16 @@ angular.module('starter.controllers', [])
    $cordovaGeolocation
    .getCurrentPosition(posOptions)	
    .then(function (position) {
-      var lat  = position.coords.latitude
-      var long = position.coords.longitude
-      console.log(lat + '   ' + long)
-      $scope.lati = lat
-      $scope.lng=long
+      var lat  = position.coords.latitude;
+      var long = position.coords.longitude;
+      console.log(lat + '   ' + long);
+      $scope.lati = lat;
+      $scope.lng = long;
    }, function(err) {
-      console.log(err)
+      console.log(err);
    });
       
-    console.log("Hey man, my card Id: "+myCardId);
-    console.log("Hey man, user id: " +userid);
-    return Links.createlink(myCardId, userid,lati,lng).
+    return Links.createlink(myCardId, userid, $scope.lati ,$scope.lng).
     then(function(response){
       console.log(response);
       $scope.closeModallinkus();
