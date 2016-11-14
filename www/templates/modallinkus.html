@@ -1,25 +1,25 @@
 <ion-modal-view>
 
-    <ion-header-bar>
-      <h1 class="title">Select Card</h1>
-      <button class="button button-secondary" ng-click="closeModallinkus()">Cancel</button>
-    </ion-header-bar>
+  <ion-header-bar>
+    <h1 class="title">Select Card</h1>
+    <button class="button button-secondary" ng-click="closeModallinkus()">Cancel</button>
+  </ion-header-bar>
 
-    <ion-header-bar class="bar bar-subheader item-input-inset">
-      <label class="item-input-wrapper search">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search..." ng-model="searchValue" ng-keyup="val=searchValue" />     
-      </label> 
-    </ion-header-bar> 
+  <ion-header-bar class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper search">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search..." ng-model="searchValue" ng-keyup="val=searchValue" />
+    </label>
+  </ion-header-bar>
 
-    <ion-content>
+  <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="card in cards | filter:val" type="item-text-wrap"
-      ng-click="linkus(card.id)">
+                ng-click="linkus(card.id)">
         <h2>{{card.card_name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
-    </ion-content>
-    
- </ion-modal-view>
+  </ion-content>
+
+</ion-modal-view>

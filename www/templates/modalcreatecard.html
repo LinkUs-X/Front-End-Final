@@ -1,21 +1,21 @@
 <ion-modal-view>
-    <ion-header-bar>
-      <h1 class="title">Create a new card</h1>
-      <button class="button button-secondary" ng-click="closeModalcreatecard()">Cancel</button>
-    </ion-header-bar>
-    <ion-content>
-<!--
-    
-      <label class="item item-input">
-  		<span class="input-label">Login (*)</span>
-  		<input type="text" ng-model="login">
-	  </label>
+  <ion-header-bar>
+    <h1 class="title">Create a new card</h1>
+    <button class="button button-secondary" ng-click="closeModalcreatecard()">Cancel</button>
+  </ion-header-bar>
 
-	  <label class="item item-input">
-    	<span class="input-label">Password (*)</span>
-    	<input type="text" ng-model="password">
-  	 </label>
--->
+  <ion-content>
+    <!--
+    <label class="item item-input">
+    <span class="input-label">Login (*)</span>
+    <input type="text" ng-model="login">
+    </label>
+
+    <label class="item item-input">
+    <span class="input-label">Password (*)</span>
+    <input type="text" ng-model="password">
+    </label>
+    -->
 
     <label class="item item-input">
       <span class="input-label">Cardname (*)</span>
@@ -82,8 +82,8 @@
       <input type="text" ng-model="picure_url">
     </label>
 
-  	  <button class="button button-outline button-positive button-full" ng-click="createcard(card_name, first_name, last_name, phone_nbr, facebook_link, linkedin_link, email, street, city, postal_code, country, description, picture_url)" ng-disabled="!card_name">
-  		Create
-	  </button>
-    </ion-content>
- </ion-modal-view>
+    <button class="button button-outline button-positive button-full" ng-click="createcard(card_name, first_name, last_name, phone_nbr, facebook_link, linkedin_link, email, street, city, postal_code, country, description, picture_url)" ng-disabled="!card_name">
+      Create
+    </button>
+  </ion-content>
+</ion-modal-view>

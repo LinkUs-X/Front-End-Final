@@ -1,35 +1,33 @@
 <ion-view view-title="Home" class="dashboard">
   <ion-content class="padding">
-      
-       <div ng-controller="GeoCtrl">
-           <button ng-controller="LoginCtrl" class="button button-outline button-positive button-full" ng-click="openModallogin()">
+
+    <div ng-controller="GeoCtrl">
+      <button ng-controller="LoginCtrl" class="button button-outline button-positive button-full" ng-click="openModallogin()">
         Login {{lat}} , {{lng}}
       </button>
-     
-        </div>
-    <div ng-controller="StateCtrl" ng-show="!isLogged">
+    </div>
 
-        
-       
-
-    	<button ng-controller="LoginCtrl" class="button button-outline button-positive button-full" ng-click="openModallogin()">
+    <div ng-controller="StateCtrl" ng-if="!logStatus.isLogged">
+      <button ng-controller="LoginCtrl" class="button button-outline button-positive button-full" ng-click="openModallogin()">
         Login
       </button>
 
-    	<button ng-controller="CreateCtrl" class="button button-outline button-positive button-full" ng-click="openModalcreateuser()">
-		    Create account
-		  </button>
-
-	  </div>
+      <button ng-controller="CreateCtrl" class="button button-outline button-positive button-full" ng-click="openModalcreateuser()">
+        Create account
+      </button>
+    </div>
 
     <img src="img/logo.png" class="logo" />
 
-    <div ng-controller="StateCtrl" ng-show="isLogged">
-        
+    <div ng-controller="StateCtrl" ng-if="logStatus.isLogged">
       <button ng-controller="LinkCtrl" class="button button-outline button-positive button-full" ng-click="openModallinkus()">
-        Make the Link ! 
+        Make the Link !
       </button>
-           </div>
-    
+
+      <button ng-controller="LogoutCtrl" class="button button-outline button-positive button-full" ng-click="openModallogout()" >
+        Log Out
+      </button>
+    </div>
+
   </ion-content>
 </ion-view>

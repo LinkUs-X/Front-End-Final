@@ -1,19 +1,19 @@
 <ion-modal-view>
-    <ion-header-bar>
-      <h1 class="title">Log in</h1>
-      <button class="button button-secondary" ng-click="closeModallogin()">Cancel</button>
-    </ion-header-bar>
-    <ion-content>
-      <label class="item item-input">
-  		<span class="input-label">Login</span>
-  		<input type="text" ng-model="login">
-	  </label>
-	  <label class="item item-input">
-    	<span class="input-label">Password</span>
-    	<input type="password" ng-model="password">
-  	  </label>
-  	  <button class="button button-outline button-positive button-full" ng-click="finduser(login, password)" ng-disabled="!login || !password">
-  		Confirm
-	  </button>
-    </ion-content>
- </ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Log in</h1>
+    <button class="button button-secondary" ng-click="closeModallogin()">Cancel</button>
+  </ion-header-bar>
+  <ion-content>
+    <label class="item item-input">
+      <span class="input-label">Login</span>
+      <input type="text" ng-model="login">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Password</span>
+      <input type="password" ng-model="password">
+    </label>
+    <button class="button button-outline button-positive button-full" ng-click="finduser(login, password)" ng-disabled="!login || !password">
+      Confirm
+    </button>
+  </ion-content>
+</ion-modal-view>

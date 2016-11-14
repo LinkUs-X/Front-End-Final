@@ -1,78 +1,74 @@
 <!--
-  This template loads for the 'tab.friend-detail' state (app.js)
-  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
-  The FriendsCtrl pulls data from the Friends service (service.js)
-  The Friends service returns an array of friend data
+This template loads for the 'tab.friend-detail' state (app.js)
+'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+The FriendsCtrl pulls data from the Friends service (service.js)
+The Friends service returns an array of friend data
 -->
 <ion-view view-title="{{contact.card.card_name}}">
   <ion-content class="padding">
     <!-- <img ng-src="{{contact.face}}" style="width: 64px; height: 64px"> -->
-   <!--
-      <div class="list card">
-      <div class="item">
-         <h2> {{contact.name}} </h2>
-          <p>    </p>
-         <p> Phone: {{contact.Number}} </p>
-         <p> email: {{contact.email}} </p>
-         <p> facebook: {{contact.facebook}} </p>
+    <!--
+    <div class="list card">
+    <div class="item">
+    <h2> {{contact.name}} </h2>
+    <p>    </p>
+    <p> Phone: {{contact.Number}} </p>
+    <p> email: {{contact.email}} </p>
+    <p> facebook: {{contact.facebook}} </p>
+    </div>
+    </div>
+    -->
+
+    <div class="list card">
+      <div class="item-text-wrap item item-avatar">
+        <!--<img src="mcfly.jpg">-->
+        <h2>{{contact.card.first_name}} {{contact.card.last_name}}</h2>
+        <p> {{contact.created_at}}</p>
+        <p>{{contact.MeetingTime}}</p>
+      </div>
+
+      <div class="list">
+
+        <a class="item item-icon-left" href="#">
+          <i class="icon ion-email"></i>
+          Mail
+          <span class="item-text-wrap item-note">
+            {{contact.card.emaill}}
+          </span>
+        </a>
+
+        <a class="item item-icon-left item-icon-right">
+          <i class="icon ion-ios-telephone"></i>
+          Phone
+          <span class="item-text-wrap item-note">
+            {{contact.card.phone_nbr}}
+          </span>
+        </a>
+
+        <a class="item item-icon-left" href="#">
+          <i class="icon ion-social-facebook"></i>
+
+          <span class="item-note">
+            <button class="button icon-left ion-person-add" href={{contact.card.facebook_link}}> Add </button>
+          </span>
+        </a>
+
+        <a class="item item-icon-left" href="#">
+          <i class="icon ion-social-linkedin"></i>
+
+          <span class="item-note">
+            <button class="button icon-left ion-person-add" href={{contact.card.linkedin_link}}> Add </button>
+          </span>
+        </a>
+
+        <a class="item item-icon-left" href="#">
+          <i class="icon ion-android-pin"></i>
+          Adress
+          <span class="item-text-wrap item-note" >
+            {{contact.card.street}},{{contact.card.postal_code}},{{contact.card.city}},{{contact.card.country}}
+          </span>
+        </a>
       </div>
     </div>
- -->    
-    <div class="list card">
-
-  <div class="item-text-wrap item item-avatar">
-    <!--<img src="mcfly.jpg">-->
-    <h2>{{contact.card.first_name}} {{contact.card.last_name}}</h2>
-    <p> {{contact.created_at}}</p> 
-    <p>{{contact.MeetingTime}}</p>
-  </div>
-
-  <div class="list">
-
-  <a class="item item-icon-left" href="#">
-    <i class="icon ion-email"></i>
-    Mail
-      <span class="item-text-wrap item-note">
-      {{contact.card.emaill}} 
-       </span>
-  </a>
-
-  <a class="item item-icon-left item-icon-right">
-    <i class="icon ion-ios-telephone"></i>
-      Phone
-     <span class="item-text-wrap item-note">
-         {{contact.card.phone_nbr}}
-       </span>   
-  </a>
-
-  <a class="item item-icon-left" href="#">
-    <i class="icon ion-social-facebook"></i>
- 
-      <span class="item-note">
-        <button class="button icon-left ion-person-add" href={{contact.card.facebook_link}}> Add </button>
-       </span>  
-  </a>
-      
-      <a class="item item-icon-left" href="#">
-    <i class="icon ion-social-linkedin"></i>
- 
-      <span class="item-note">
-        <button class="button icon-left ion-person-add" href={{contact.card.linkedin_link}}> Add </button>
-       </span>  
-  </a>
-
-      <a class="item item-icon-left" href="#">
-    <i class="icon ion-android-pin"></i>
-          Adress
-     <span class="item-text-wrap item-note" >
-         {{contact.card.street}},{{contact.card.postal_code}},{{contact.card.city}},{{contact.card.country}}
-       </span> 
-  </a>
-
-      
-</div>
-
-</div>
-      
   </ion-content>
 </ion-view>
