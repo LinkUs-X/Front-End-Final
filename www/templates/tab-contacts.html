@@ -1,26 +1,26 @@
 <ion-view view-title="Contacts">
 
-  <div ng-controller="StateCtrl" ng-show="isLogged"> 
-   
-   <ion-header-bar class="bar bar-subheader item-input-inset"> 
+  <div ng-controller="StateCtrl" ng-if="logStatus.isLogged">
+
+    <ion-header-bar class="bar bar-subheader item-input-inset">
       <label class="item-input-wrapper search">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search..." ng-model="searchValue" ng-keyup="val=searchValue" />     
+        <input type="text" placeholder="Search..." ng-model="searchValue" ng-keyup="val=searchValue" />
       </label>
- </ion-header-bar>
-            
-  <ion-content>
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts | filter:val" type="item-text-wrap" href="#/tab/contacts/{{contact.card_id}}">
-        <img ng-src="{{contact.face}}">
-        <h2>{{contact.card.first_name}} {{contact.card.last_name}}</h2>
-        <p> {{contact.created_at}} </p>
-         <p>lat:{{contact.lat}}, lng: {{contact.lng}}</p>
-         
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-  
+    </ion-header-bar>
+
+    <ion-content>
+      <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts | filter:val" type="item-text-wrap" href="#/tab/contacts/{{contact.card_id}}">
+          <img ng-src="{{contact.face}}">
+          <h2>{{contact.card.first_name}} {{contact.card.last_name}}</h2>
+          <p> {{contact.created_at}} </p>
+          <p>lat:{{contact.lat}}, lng: {{contact.lng}}</p>
+
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
   </div>
 </ion-view>

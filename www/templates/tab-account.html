@@ -1,34 +1,29 @@
 <ion-view view-title="Account">
 
-  <div ng-controller="StateCtrl" ng-show="isLogged"> 
+  <div ng-controller="StateCtrl" ng-if="logStatus.isLogged">
 
-   <ion-header-bar class="bar bar-subheader item-input-inset">
+    <ion-header-bar class="bar bar-subheader item-input-inset">
       <label class="item-input-wrapper search">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search..." ng-model="searchValue" ng-keyup="val=searchValue" />     
-      </label>  
- </ion-header-bar>            
-            
-  <ion-content>
-    <button class="button button-outline button-positive button-full" ng-click="openModalcreatecard()">
-		  Create card
-	  </button>
+        <input type="text" placeholder="Search..." ng-model="searchValue" ng-keyup="val=searchValue" />
+      </label>
+    </ion-header-bar>
 
-    <button ng-controller="LogoutCtrl" class="button button-outline button-positive button-full" ng-click="openModallogout()" >
-      Log Out
-    </button>
+    <ion-content>
+      <button class="button button-outline button-positive button-full" ng-click="openModalcreatecard()">
+        Create card
+      </button>
 
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right 'bounce-animation' : 'animate-in-primary'" ng-repeat="card in cards | filter:val" type="item-text-wrap" href="#/tab/account/{{card.id}}">
-        <!-- <img ng-src="{{card.face}}"> -->
-        
+      <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right 'bounce-animation' : 'animate-in-primary'" ng-repeat="card in cards | filter:val" type="item-text-wrap" href="#/tab/account/{{card.id}}">
+          <!-- <img ng-src="{{card.face}}"> -->
+
           <h2>{{card.card_name}}</h2>
-         
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </ion-item>
-    </ion-list>
 
-  </ion-content>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+      </ion-list>
+    </ion-content>
 
   </div>
 
