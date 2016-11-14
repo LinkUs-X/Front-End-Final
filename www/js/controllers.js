@@ -34,9 +34,6 @@ angular.module('starter.controllers', [])
     return Users.finduser(login, password) //checkuser returns the userId
       .then(function(response) {
 
-      //tests
-      console.log(response);
-
       //not used for now
       localStorage.setItem('userid', response);
       localStorage.setItem('isLogged', true);
@@ -49,12 +46,8 @@ angular.module('starter.controllers', [])
     }).then(function(response){
 
       //tests
-      console.log(logStatus.isLogged);
       var testid = String(localStorage.getItem('userid'));
       var testStatus = String(localStorage.getItem('isLogged'));
-      console.log("local Storage id:" + testid);
-      console.log('local Storage status:' + testStatus);
-
       $scope.closeModallogin();
     })
       .then(undefined, function(error) {
@@ -84,10 +77,6 @@ angular.module('starter.controllers', [])
     return Users.createuser(login, password)
       .then(function(response) {
 
-      //tests
-      console.log("User", user);
-      console.log(response);
-
       //not used yet
       localStorage.setItem('userid', response);
       localStorage.setItem('isLogged', true);
@@ -98,15 +87,12 @@ angular.module('starter.controllers', [])
       currentId.userId = response;
     }).then(function(response){
 
-      // tests
-      console.log(logStatus.isLogged);
-
       $scope.closeModalcreateuser();
     });
   }
 })
 
-.controller('LinkCtrl', function($scope, $stateParams, $ionicModal, Cards, logStatus, currentId, Links,$cordovaGeolocation) {
+.controller('LinkCtrl', function($, $http, $scope, $stateParams, $ionicModal, Cards, logStatus, currentId, Links,$cordovaGeolocation) {
 
   $scope.cards = [];
 
@@ -184,7 +170,33 @@ angular.module('starter.controllers', [])
 
     return Links.createlink(myCardId, userid, $scope.lati ,$scope.lng).
     then(function(response){
-      console.log(response);
+      
+      /*
+      var temp = currentId.userId;
+      currentId.userId = 16;
+      currentId.userId = temp;
+      
+      var test = JSON.stringify($http.get("https://link-us-back.herokuapp.com/users/" + userid + "/verifylinkcreation.json"));
+
+      console.log("this is the test: " + test);
+  
+      while (test==="pending"){
+        test = JSON.stringify($http.get("https://link-us-back.herokuapp.com/users/" + userid + "/verifylinkcreation.json"));
+      }
+      if (test==="success"){
+        // success message, new link created
+
+        var temp = currentId.userId;
+        currentId.userId = 16;
+        currentId.userId = temp;
+      }
+      else{ //test==="error"
+        // error message
+
+      }
+
+      */
+
       $scope.closeModallinkus();
     })
 
@@ -215,8 +227,6 @@ angular.module('starter.controllers', [])
 
   $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
     if(newVal) {
-      console.log("hey" + newVal);
-
       $scope.userid = newVal;
       Contacts.all(newVal) //checkuser returns the userId
         .then(function(response) {
@@ -243,7 +253,6 @@ angular.module('starter.controllers', [])
 
   $scope.$watch('currentId.userId', function (newVal, oldVal, scope) {
     if(newVal) {
-      // console.log("hey" + newVal);
       scope.userid = newVal;
       userId = newVal;
       Cards.all(newVal) //checkuser returns the userId
@@ -276,12 +285,10 @@ angular.module('starter.controllers', [])
     return Cards.createcard(card_name, first_name, last_name, phone_nbr, facebook_link,
                             linkedin_link, email, street, city, postal_code, country, description, picture_url, userId)
       .then(function(response) {
-      console.log("Card", card);
       $scope.closeModalcreatecard();
 
       $scope.$watch('currentId.userId', function (newVal, oldVal, scope) { // modification de currrentId.userId -> appelle le callback function
         if(newVal) {
-          // console.log("hey" + newVal);
           scope.userid = newVal;
           userId = newVal;
           Cards.all(newVal) //checkuser returns the userId
@@ -313,7 +320,6 @@ angular.module('starter.controllers', [])
   $scope.closeModallogout = function() {
     $scope.$watch('currentId.userId', function (newVal, oldVal, scope) { // modification de currrentId.userId -> appelle le callback function
       if(newVal) {
-        // console.log("hey" + newVal);
         scope.userid = newVal;
         userId = newVal;
         Cards.all(newVal) //checkuser returns the userId
@@ -335,7 +341,6 @@ angular.module('starter.controllers', [])
 
     $scope.$watch('currentId.userId', function (newVal, oldVal, scope) { // modification de currrentId.userId -> appelle le callback function
       if(newVal) {
-        // console.log("hey" + newVal);
         scope.userid = newVal;
         userId = newVal;
         Cards.all(newVal) //checkuser returns the userId

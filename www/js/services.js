@@ -90,7 +90,6 @@ angular.module('starter.services', [])
         then(function(response){
           contacts = response.data;
           contacts = contacts.links;
-          console.log("contacts:" + JSON.stringify(contacts));
           return contacts;
         }) 
         },
@@ -133,8 +132,6 @@ angular.module('starter.services', [])
     createcard: function(card_name, first_name, last_name, phone_nbr, facebook_link,
       linkedin_link, email, street, city, postal_code, country, description, picture_url, userId) {
 
-        console.log("hey jude" + userId);
-
         return $http.post("https://link-us-back.herokuapp.com/users/" + userId + "/createcard.json",
           {card: {card_name: card_name, first_name: first_name, last_name: last_name, phone_nbr: phone_nbr,
           facebook_link: facebook_link, linkedin_link: linkedin_link, email: email, street: street, city: city,
@@ -156,14 +153,10 @@ angular.module('starter.services', [])
         cards_data = cards_data.cards;
 
         for(var i = 0; i < cards_data.length; i++) {
-          console.log(cards_data[i].user_id);
           if(cards_data[i].user_id===userId) {
             cards.push(cards_data[i]);
-            console.log("good news" + cards_data[i].user_id);
           }
         }
-
-        console.log(cards);
         return cards;
       })
     },
@@ -187,7 +180,6 @@ angular.module('starter.services', [])
     get: function(cardId) {
       for (var i = 0; i < cards.length; i++) {
         if (cards[i].id === parseInt(cardId)) {
-          console.log("lolilol" + cards[i].user_id)
           return cards[i];
         }
       }
